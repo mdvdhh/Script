@@ -83,7 +83,7 @@ function Notification:Show(data)
 		local iconLabel = Instance.new("ImageLabel")
 		iconLabel.Image = icon
 		iconLabel.Size = UDim2.new(0, 40, 0, 40)
-		iconLabel.Position = UDim2.new(0, 10, 0, 20)
+		iconLabel.Position = UDim2.new(0, 10, 0, 10)
 		iconLabel.BackgroundTransparency = 1
 		iconLabel.Parent = frame
 	end
