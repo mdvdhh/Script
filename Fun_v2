@@ -72,13 +72,6 @@ function Notification:Show(data)
 	frame.Parent = container
 	makeCorner(frame, 10)
 
-	local accent = Instance.new("Frame")
-	accent.Size = UDim2.new(0, 4, 1, 0)
-	accent.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
-	accent.BorderSizePixel = 0
-	accent.Parent = frame
-	makeCorner(accent, 4)
-
 	if icon and icon ~= "" then
 		local iconLabel = Instance.new("ImageLabel")
 		iconLabel.Image = icon
