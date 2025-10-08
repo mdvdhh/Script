@@ -106,6 +106,7 @@ function Notification:Show(data)
 	messageLabel.Font = Enum.Font.SourceSans
 	messageLabel.TextSize = 14
 	messageLabel.TextWrapped = true
+    messageLabel.TextScaled = true
 	messageLabel.TextColor3 = textColor
 	messageLabel.TextXAlignment = Enum.TextXAlignment.Left
 	messageLabel.TextYAlignment = Enum.TextYAlignment.Top
