@@ -1,0 +1,62 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+local TeamCheck = getgenv().TeamCheck or false
+local LockedTarget = nil
+local Highlight = nil
+
+local function CreateHighlight(target)
+    if Highlight then Highlight:Destroy() end
+    Highlight = Instance.new("Highlight")
+    Highlight.Adornee = target
+    Highlight.FillColor = Color3.fromRGB(0, 170, 255)
+    Highlight.OutlineColor = Color3.fromRGB(0, 255, 255)
+    Highlight.FillTransparency = 0.5
+    Highlight.OutlineTransparency = 0
+    Highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    Highlight.Parent = target
+end
+
+local function GetMagnitude(part)
+    return (LocalPlayer.Character.HumanoidRootPart.Position - part.Position).Magnitude
+end
+
+local function GetClosestPlayer()
+    local closestPlayer = nil
+    local shortestDistance = math.huge
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            if TeamCheck and player.Team == LocalPlayer.Team then
+                continue
+            end
+            local distance = GetMagnitude(player.Character.HumanoidRootPart)
+            if distance < shortestDistance then
+                closestPlayer = player
+                shortestDistance = distance
+            end
+        end
+    end
+    return closestPlayer
+end
+
+RunService.RenderStepped:Connect(function()
+    local character = LocalPlayer.Character
+    if not character or not character:FindFirstChild("HumanoidRootPart") then return end
+
+    local closest = GetClosestPlayer()
+    if closest and closest.Character and closest.Character:FindFirstChild("HumanoidRootPart") then
+        if LockedTarget ~= closest then
+            LockedTarget = closest
+            CreateHighlight(closest.Character)
+        end
+        local hrp = character.HumanoidRootPart
+        local targetPos = Vector3.new(closest.Character.HumanoidRootPart.Position.X, hrp.Position.Y, closest.Character.HumanoidRootPart.Position.Z)
+        hrp.CFrame = CFrame.new(hrp.Position, targetPos)
+    elseif Highlight then
+        Highlight:Destroy()
+        Highlight = nil
+        LockedTarget = nil
+    end
+end)
