@@ -96,5 +96,5 @@ Button.MouseButton1Click:Connect(function()
     Running = false
     if connection then connection:Disconnect() end
     if Highlight then Highlight:Destroy() end
-    ScreenGui:Destroy()
+    N8WR5A2K:Destroy()
 end)
