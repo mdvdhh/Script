@@ -7,12 +7,35 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/mdvdhh/Script/refs/he
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
 local LocalPlayer = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
 
 local TeamCheck = getgenv().TeamCheck or false
 local LockedTarget = nil
 local Highlight = nil
+local Running = true
+
+local N8WR5A2K = Instance.new("ScreenGui")
+local Button = Instance.new("TextButton")
+
+N8WR5A2K.Name = "N8WR5A2K"
+N8WR5A2K.Parent = game.CoreGui
+N8WR5A2K.ResetOnSpawn = false
+
+Button.Size = UDim2.new(0, 120, 0, 40)
+Button.Position = UDim2.new(0.5, -60, 0.9, 0)
+Button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Button.Text = "Turn Off"
+Button.TextColor3 = Color3.new(252, 0, 0)
+Button.Font = Enum.Font.GothamBold
+Button.TextSize = 18
+Button.Parent = ScreenGui
+Button.AutoButtonColor = true
+Button.BorderSizePixel = 0
+Button.BackgroundTransparency = 0.05
+Button.Active = true
+Button.Draggable = true
 
 local function CreateHighlight(target)
     if Highlight then Highlight:Destroy() end
@@ -48,10 +71,11 @@ local function GetClosestPlayer()
     return closestPlayer
 end
 
-RunService.RenderStepped:Connect(function()
+local connection
+connection = RunService.RenderStepped:Connect(function()
+    if not Running then return end
     local character = LocalPlayer.Character
     if not character or not character:FindFirstChild("HumanoidRootPart") then return end
-
     local closest = GetClosestPlayer()
     if closest and closest.Character and closest.Character:FindFirstChild("HumanoidRootPart") then
         if LockedTarget ~= closest then
@@ -66,4 +90,11 @@ RunService.RenderStepped:Connect(function()
         Highlight = nil
         LockedTarget = nil
     end
+end)
+
+Button.MouseButton1Click:Connect(function()
+    Running = false
+    if connection then connection:Disconnect() end
+    if Highlight then Highlight:Destroy() end
+    ScreenGui:Destroy()
 end)
