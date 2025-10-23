@@ -1,3 +1,10 @@
+--[[ 
+How to use
+
+getgenv().TeamCheck = true
+loadstring(game:HttpGet("https://raw.githubusercontent.com/mdvdhh/Script/refs/heads/main/PlayerLock"))()
+]]
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
