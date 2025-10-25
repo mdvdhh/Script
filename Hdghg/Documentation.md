@@ -1,17 +1,32 @@
-# Orion Library
-
-This documentation is for the stable release of Orion Library.
-
----
-
-## Booting the Library
-
+# Load EightCI
 ```lua
-local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/yourname/YourRepo/main/OrionLib.lua"))()
+local EightCI = loadstring(game:HttpGet("https://raw.githubusercontent.com/mdvdhh/Library/refs/heads/main/Test"))()
+```
 
----
-
-## hiss
-
+# Create Window
 ```lua
-https://raw.githubusercontent.com/yourname/YourRepo/main/OrionLib.lua
+local Window = EightCI:CreateWindow({
+    Title = "EightCI Ui",
+})
+```
+
+# Create Button
+```lua
+local Button = EightCI:Button({
+    Title = "Click Me",
+    Callback = function()
+        print("Button clicked!")
+    end
+})
+```
+
+# Create Toggle
+```lua
+local Toggle = EightCI:Toggle({
+    Title = "Cool Toggle",
+    Default = false,
+    Callback = function(state)
+        print("Toggle state:", state)
+    end
+```
+})
