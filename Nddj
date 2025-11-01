@@ -1,0 +1,461 @@
+-- ReachGui V3 — cleaned & rounded
+-- Ghi chú: script giữ nguyên logic gốc, chỉ thay đổi appearance (UiCorner, colors, layout)
+
+-- Instances:
+local Reachgui = Instance.new("ScreenGui")
+local Drag = Instance.new("Frame")
+local TitleBar = Instance.new("Frame")
+local TitleLabel = Instance.new("TextLabel")
+local TitleClose = Instance.new("TextButton")
+local TitleMinimize = Instance.new("TextButton")
+local MainFrame = Instance.new("Frame")
+local LeftPanel = Instance.new("Frame")
+local LeftLayout = Instance.new("UIListLayout")
+local Home = Instance.new("TextButton")
+local Reach = Instance.new("TextButton")
+local Removegui = Instance.new("TextButton")
+local RightPanel = Instance.new("Frame")
+local ho = Instance.new("Frame")
+local Good = Instance.new("TextLabel")
+local Name1 = Instance.new("TextLabel")
+local TextButton = Instance.new("TextButton")
+local Link = Instance.new("TextLabel")
+local Cred = Instance.new("TextLabel")
+local Reacch = Instance.new("Frame")
+local X = Instance.new("TextBox")
+local Y = Instance.new("TextBox")
+local Z = Instance.new("TextBox")
+local Red = Instance.new("TextBox")
+local Blue = Instance.new("TextBox")
+local Green = Instance.new("TextBox")
+local Transparent = Instance.new("TextBox")
+local Activ1 = Instance.new("TextButton")
+local Activ = Instance.new("TextButton")
+local Boxtr = Instance.new("TextBox")
+local ClearB = Instance.new("TextButton")
+local Open = Instance.new("TextButton")
+
+-- parent
+Reachgui.Name = "Reach gui"
+Reachgui.Parent = game:GetService("CoreGui")
+Reachgui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+-- Drag (container)
+Drag.Name = "Drag"
+Drag.Parent = Reachgui
+Drag.AnchorPoint = Vector2.new(0,0)
+Drag.Position = UDim2.new(0.08,0,0.12,0)
+Drag.Size = UDim2.new(0, 420, 0, 240)
+Drag.BackgroundTransparency = 1
+Drag.Active = true
+Drag.Draggable = true
+
+-- Title bar (top strip)
+TitleBar.Name = "TitleBar"
+TitleBar.Parent = Drag
+TitleBar.BackgroundColor3 = Color3.fromRGB(18,18,20)
+TitleBar.BorderSizePixel = 0
+TitleBar.Size = UDim2.new(1,0,0,36)
+
+local tc_corner = Instance.new("UICorner", TitleBar)
+tc_corner.CornerRadius = UDim.new(0,5)
+
+local tc_stroke = Instance.new("UIStroke", TitleBar)
+tc_stroke.Thickness = 1
+tc_stroke.Transparency = 0.75
+
+-- Title label
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Parent = TitleBar
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Position = UDim2.new(0.02,0,0,0)
+TitleLabel.Size = UDim2.new(0.6,0,1,0)
+TitleLabel.Font = Enum.Font.GothamSemibold
+TitleLabel.Text = "Reach Gui V3"
+TitleLabel.TextColor3 = Color3.fromRGB(235,235,235)
+TitleLabel.TextScaled = true
+TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Close button
+TitleClose.Name = "Close"
+TitleClose.Parent = TitleBar
+TitleClose.BackgroundTransparency = 1
+TitleClose.Position = UDim2.new(0.94,0,0.05,0)
+TitleClose.Size = UDim2.new(0,28,0,28)
+TitleClose.Font = Enum.Font.SourceSansBold
+TitleClose.Text = "✕"
+TitleClose.TextColor3 = Color3.fromRGB(255,255,255)
+TitleClose.TextScaled = true
+TitleClose.MouseButton1Click:Connect(function()
+	Open.Visible = true
+	Drag.Visible = false
+end)
+
+-- Minimize button
+TitleMinimize.Name = "Minimize"
+TitleMinimize.Parent = TitleBar
+TitleMinimize.BackgroundTransparency = 1
+TitleMinimize.Position = UDim2.new(0.88,0,0.05,0)
+TitleMinimize.Size = UDim2.new(0,28,0,28)
+TitleMinimize.Font = Enum.Font.SourceSansBold
+TitleMinimize.Text = "—"
+TitleMinimize.TextColor3 = Color3.fromRGB(210,210,210)
+TitleMinimize.TextScaled = true
+
+-- Main frame (below title)
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = Drag
+MainFrame.BackgroundColor3 = Color3.fromRGB(28,28,30)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0,0,0,36)
+MainFrame.Size = UDim2.new(1,0,1,-36)
+
+local mf_corner = Instance.new("UICorner", MainFrame)
+mf_corner.CornerRadius = UDim.new(0,5)
+
+-- Left panel (sidebar)
+LeftPanel.Name = "LeftPanel"
+LeftPanel.Parent = MainFrame
+LeftPanel.BackgroundColor3 = Color3.fromRGB(23,23,25)
+LeftPanel.BorderSizePixel = 0
+LeftPanel.Size = UDim2.new(0,100,1,0)
+
+local lp_corner = Instance.new("UICorner", LeftPanel)
+lp_corner.CornerRadius = UDim.new(0,5)
+
+LeftLayout.Name = "LeftLayout"
+LeftLayout.Parent = LeftPanel
+LeftLayout.SortOrder = Enum.SortOrder.LayoutOrder
+LeftLayout.Padding = UDim.new(0,8)
+
+-- Sidebar buttons (Home, Reach, Remove)
+local function styleSidebarButton(btn)
+	btn.BackgroundColor3 = Color3.fromRGB(27,27,29)
+	btn.BorderSizePixel = 0
+	btn.Size = UDim2.new(1,-12,0,44)
+	btn.AutoButtonColor = true
+	btn.Font = Enum.Font.Gotham
+	btn.TextColor3 = Color3.fromRGB(230,230,230)
+	btn.TextScaled = true
+	btn.TextWrapped = true
+	btn.LayoutOrder = 1
+
+	local c = Instance.new("UICorner", btn)
+	c.CornerRadius = UDim.new(0,5)
+
+	local s = Instance.new("UIStroke", btn)
+	s.Thickness = 1
+	s.Transparency = 0.85
+end
+
+Home.Name = "Home"
+Home.Parent = LeftPanel
+Home.Text = "Home"
+styleSidebarButton(Home)
+Home.LayoutOrder = 1
+Home.MouseButton1Click:Connect(function()
+	ho.Visible = true
+	Reacch.Visible = false
+end)
+
+Reach.Name = "Reach"
+Reach.Parent = LeftPanel
+Reach.Text = "Reach"
+styleSidebarButton(Reach)
+Reach.LayoutOrder = 2
+Reach.MouseButton1Click:Connect(function()
+	ho.Visible = false
+	Reacch.Visible = true
+end)
+
+Removegui.Name = "Remove gui"
+Removegui.Parent = LeftPanel
+Removegui.Text = "Remove"
+Removegui.BackgroundColor3 = Color3.fromRGB(200,60,60)
+Removegui.TextColor3 = Color3.fromRGB(20,20,20)
+styleSidebarButton(Removegui)
+Removegui.LayoutOrder = 3
+Removegui.MouseButton1Click:Connect(function()
+	Reachgui:Destroy()
+end)
+
+-- Right panel (content)
+RightPanel.Name = "RightPanel"
+RightPanel.Parent = MainFrame
+RightPanel.BackgroundTransparency = 1
+RightPanel.Position = UDim2.new(0, 104, 0, 0)
+RightPanel.Size = UDim2.new(1, -104, 1, 0)
+
+-- HO (home) frame
+ho.Name = "ho"
+ho.Parent = RightPanel
+ho.BackgroundColor3 = Color3.fromRGB(33,33,35)
+ho.BorderSizePixel = 0
+ho.Size = UDim2.new(1, -12, 1, -12)
+ho.Position = UDim2.new(0,6,0,6)
+
+local ho_corner = Instance.new("UICorner", ho)
+ho_corner.CornerRadius = UDim.new(0,5)
+
+local ho_stroke = Instance.new("UIStroke", ho)
+ho_stroke.Thickness = 1
+ho_stroke.Transparency = 0.8
+
+Good.Name = "Good"
+Good.Parent = ho
+Good.BackgroundTransparency = 1
+Good.Position = UDim2.new(0.03,0,0.02,0)
+Good.Size = UDim2.new(0.94,0,0,50)
+Good.Font = Enum.Font.GothamBold
+Good.Text = "Thanks for using Reach Gui V3 — please subscribe :)"
+Good.TextColor3 = Color3.fromRGB(230,230,230)
+Good.TextScaled = true
+Good.TextWrapped = true
+
+Name1.Name = "Name"
+Name1.Parent = ho
+Name1.BackgroundTransparency = 1
+Name1.Position = UDim2.new(0.03,0,0.26,0)
+Name1.Size = UDim2.new(0.94,0,0,36)
+Name1.Font = Enum.Font.Gotham
+pcall(function()
+	Name1.Text = game.Players:GetPlayerFromCharacter(game.Workspace.CurrentCamera.CameraSubject.Parent).Name or ""
+end)
+Name1.TextColor3 = Color3.fromRGB(200,200,200)
+Name1.TextScaled = true
+
+TextButton.Parent = ho
+TextButton.BackgroundColor3 = Color3.fromRGB(40,120,220)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.03,0,0.54,0)
+TextButton.Size = UDim2.new(0.4,0,0,38)
+TextButton.Font = Enum.Font.GothamBold
+TextButton.Text = "Rejoin"
+TextButton.TextColor3 = Color3.fromRGB(255,255,255)
+TextButton.TextScaled = true
+local tb_corner = Instance.new("UICorner", TextButton)
+tb_corner.CornerRadius = UDim.new(0,5)
+TextButton.MouseButton1Click:Connect(function()
+	pcall(function()
+		game:GetService("TeleportService"):Teleport(game.PlaceId)
+	end)
+end)
+
+Link.Name = "Link"
+Link.Parent = ho
+Link.BackgroundTransparency = 1
+Link.Position = UDim2.new(0.03,0,0.74,0)
+Link.Size = UDim2.new(0.94,0,0,30)
+Link.Font = Enum.Font.Gotham
+Link.Text = "YT: https://Youtube.com/c/Warriorrober"
+Link.TextColor3 = Color3.fromRGB(180,180,180)
+Link.TextScaled = true
+Link.TextWrapped = true
+
+Cred.Name = "Cred"
+Cred.Parent = ho
+Cred.BackgroundTransparency = 1
+Cred.Position = UDim2.new(0.03,0,0.86,0)
+Cred.Size = UDim2.new(0.94,0,0,24)
+Cred.Font = Enum.Font.Gotham
+Cred.Text = "Script made by WarriorRoberr"
+Cred.TextColor3 = Color3.fromRGB(150,150,150)
+Cred.TextScaled = true
+
+-- REACCH frame (right content)
+Reacch.Name = "Reacch"
+Reacch.Parent = RightPanel
+Reacch.BackgroundColor3 = Color3.fromRGB(33,33,35)
+Reacch.BorderSizePixel = 0
+Reacch.Size = UDim2.new(1, -12, 1, -12)
+Reacch.Position = UDim2.new(0,6,0,6)
+Reacch.Visible = false
+
+local rc_corner = Instance.new("UICorner", Reacch)
+rc_corner.CornerRadius = UDim.new(0,5)
+local rc_stroke = Instance.new("UIStroke", Reacch)
+rc_stroke.Thickness = 1
+rc_stroke.Transparency = 0.8
+
+local function styleInput(tb, place)
+	tb.BackgroundColor3 = Color3.fromRGB(24,24,26)
+	tb.BorderSizePixel = 0
+	tb.Size = UDim2.new(0,86,0,38)
+	tb.Font = Enum.Font.Gotham
+	tb.TextColor3 = Color3.fromRGB(230,230,230)
+	tb.PlaceholderColor3 = Color3.fromRGB(150,150,150)
+	tb.PlaceholderText = place or ""
+	local c = Instance.new("UICorner", tb)
+	c.CornerRadius = UDim.new(0,5)
+end
+
+X.Name = "X"
+X.Parent = Reacch
+X.Position = UDim2.new(0.04,0,0.07,0)
+styleInput(X, "X size")
+X.Text = "X"
+
+Y.Name = "Y"
+Y.Parent = Reacch
+Y.Position = UDim2.new(0.34,0,0.07,0)
+styleInput(Y, "Y size")
+Y.Text = "Y"
+
+Z.Name = "Z"
+Z.Parent = Reacch
+Z.Position = UDim2.new(0.64,0,0.07,0)
+styleInput(Z, "Z size")
+Z.Text = "Z"
+
+Red.Name = "Red"
+Red.Parent = Reacch
+Red.Position = UDim2.new(0.04,0,0.34,0)
+styleInput(Red, "R")
+Red.Text = "255"
+
+Green.Name = "Green"
+Green.Parent = Reacch
+Green.Position = UDim2.new(0.34,0,0.34,0)
+styleInput(Green, "G")
+Green.Text = "255"
+
+Blue.Name = "Blue"
+Blue.Parent = Reacch
+Blue.Position = UDim2.new(0.64,0,0.34,0)
+styleInput(Blue, "B")
+Blue.Text = "255"
+
+Transparent.Name = "Transparent"
+Transparent.Parent = Reacch
+Transparent.Position = UDim2.new(0.04,0,0.62,0)
+Transparent.Size = UDim2.new(0,170,0,36)
+Transparent.BackgroundColor3 = Color3.fromRGB(24,24,26)
+Transparent.PlaceholderText = "Transparency (0-1)"
+Transparent.Text = "0.7"
+local tcorner = Instance.new("UICorner", Transparent)
+tcorner.CornerRadius = UDim.new(0,5)
+
+Activ1.Name = "Activ1"
+Activ1.Parent = Reacch
+Activ1.BackgroundColor3 = Color3.fromRGB(40,120,220)
+Activ1.Position = UDim2.new(0.55,0,0.62,0)
+Activ1.Size = UDim2.new(0,136,0,36)
+Activ1.Font = Enum.Font.GothamBold
+Activ1.Text = "Ball Reach"
+Activ1.TextColor3 = Color3.fromRGB(255,255,255)
+Activ1.TextScaled = true
+local a1corner = Instance.new("UICorner", Activ1)
+a1corner.CornerRadius = UDim.new(0,5)
+Activ1.MouseButton1Click:Connect(function()
+	pcall(function()
+		local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+		if tool and tool:FindFirstChild("Handle") then
+			local box1 = Instance.new("SelectionSphere")
+			box1.Parent = tool.Handle
+			box1.Adornee = tool.Handle
+			box1.Color3 = Color3.fromRGB(tonumber(Red.Text) or 255, tonumber(Green.Text) or 255, tonumber(Blue.Text) or 255)
+			local tnum = tonumber(Transparent.Text) or 0.7
+			box1.Transparency = tnum
+			box1.SurfaceTransparency = tnum
+			tool.Handle.Shape = Enum.PartType.Ball
+			tool.Handle.Size = Vector3.new(tonumber(X.Text) or 1, tonumber(Y.Text) or 1, tonumber(Z.Text) or 1)
+			tool.Handle.Massless = true
+		end
+	end)
+end)
+
+Activ.Name = "Activ"
+Activ.Parent = Reacch
+Activ.BackgroundColor3 = Color3.fromRGB(60,160,80)
+Activ.Position = UDim2.new(0.55,0,0.76,0)
+Activ.Size = UDim2.new(0,136,0,36)
+Activ.Font = Enum.Font.GothamBold
+Activ.Text = "Block Reach"
+Activ.TextColor3 = Color3.fromRGB(255,255,255)
+Activ.TextScaled = true
+local a2corner = Instance.new("UICorner", Activ)
+a2corner.CornerRadius = UDim.new(0,5)
+Activ.MouseButton1Click:Connect(function()
+	pcall(function()
+		local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+		if tool and tool:FindFirstChild("Handle") then
+			local box = Instance.new("SelectionBox")
+			box.Parent = tool.Handle
+			box.Adornee = tool.Handle
+			box.Color3 = Color3.fromRGB(tonumber(Red.Text) or 255, tonumber(Green.Text) or 255, tonumber(Blue.Text) or 255)
+			local tnum = tonumber(Transparent.Text) or 0.7
+			box.Transparency = tnum
+			tool.Handle.Shape = Enum.PartType.Block
+			tool.Handle.Size = Vector3.new(tonumber(X.Text) or 1, tonumber(Y.Text) or 1, tonumber(Z.Text) or 1)
+			tool.Handle.Massless = true
+		end
+	end)
+end)
+
+Boxtr.Name = "Boxtr"
+Boxtr.Parent = Reacch
+Boxtr.Position = UDim2.new(0.04,0,0.84,0)
+Boxtr.Size = UDim2.new(0,170,0,30)
+Boxtr.Font = Enum.Font.Gotham
+Boxtr.PlaceholderText = "Box Transparent"
+Boxtr.Text = "Box Transparent"
+Boxtr.TextScaled = true
+local boxtr_corner = Instance.new("UICorner", Boxtr)
+boxtr_corner.CornerRadius = UDim.new(0,5)
+
+ClearB.Name = "Clear B"
+ClearB.Parent = Reacch
+ClearB.BackgroundColor3 = Color3.fromRGB(200,80,80)
+ClearB.Position = UDim2.new(0.55,0,0.84,0)
+ClearB.Size = UDim2.new(0,136,0,36)
+ClearB.Font = Enum.Font.GothamBold
+ClearB.Text = "Clear Boxes"
+ClearB.TextColor3 = Color3.fromRGB(255,255,255)
+ClearB.TextScaled = true
+local clear_corner = Instance.new("UICorner", ClearB)
+clear_corner.CornerRadius = UDim.new(0,5)
+ClearB.MouseButton1Click:Connect(function()
+	pcall(function()
+		local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+		if tool and tool:FindFirstChild("Handle") then
+			if tool.Handle:FindFirstChildOfClass("SelectionBox") then
+				tool.Handle:FindFirstChildOfClass("SelectionBox"):Destroy()
+			end
+			if tool.Handle:FindFirstChildOfClass("SelectionSphere") then
+				tool.Handle:FindFirstChildOfClass("SelectionSphere"):Destroy()
+			end
+		end
+	end)
+end)
+
+-- Open button (when closed)
+Open.Name = "Open"
+Open.Parent = Reachgui
+Open.BackgroundColor3 = Color3.fromRGB(18,18,20)
+Open.Position = UDim2.new(0,8,0.42,0)
+Open.Size = UDim2.new(0,92,0,48)
+Open.Font = Enum.Font.GothamBold
+Open.Text = "Open"
+Open.TextColor3 = Color3.fromRGB(235,235,235)
+Open.TextScaled = true
+local open_corner = Instance.new("UICorner", Open)
+open_corner.CornerRadius = UDim.new(0,5)
+Open.Visible = false
+Open.MouseButton1Click:Connect(function()
+	Open.Visible = false
+	Drag.Visible = true
+end)
+
+-- Minimize toggle
+local collapsed = false
+TitleMinimize.MouseButton1Click:Connect(function()
+	if not collapsed then
+		MainFrame.Visible = false
+		Drag.Size = UDim2.new(0,420,0,36)
+		collapsed = true
+	else
+		MainFrame.Visible = true
+		Drag.Size = UDim2.new(0,420,0,240)
+		collapsed = false
+	end
+end)
