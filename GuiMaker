@@ -24,7 +24,7 @@ SourceCodeScrolling.Visible = false
 
 SourceCode.Parent = SourceCodeScrolling
 SourceCode.BackgroundColor3 = Color3.new(1,1,1)
-SourceCode.BackgroundTransparency = 0
+SourceCode.BackgroundTransparency = 0.15
 SourceCode.BorderColor3 = Color3.new(0,0,0)
 SourceCode.Position = UDim2.new(0, 0, 0, 0)
 SourceCode.TextColor3 = Color3.new(0,0,0)
@@ -1710,7 +1710,7 @@ else
 end
 end)
 
-wait(0.7)
+wait(0.01)
 
 local function AddCorner(ui)
 	local corner = Instance.new("UICorner")
